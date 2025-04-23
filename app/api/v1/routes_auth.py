@@ -59,4 +59,4 @@ def reset_password_endpoint(data: ResetPasswordRequest):
 
 @router.get("/test-cicd")
 def test_cicd():
-    return {"msg" : "Testing ci cd"}
+    return {"msg" : "CICD Final Setup checking"}
