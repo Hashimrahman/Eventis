@@ -11,8 +11,11 @@ class UserModel(BaseModel):
     hashed_password: str
     phone: str
     role: str
-    email_verified: bool = True
+    email_verified: bool = False
     verification_token: Optional[str]
     is_active: bool = True
+    is_admin: bool = False
     reset_token: Optional[str] = None
     reset_token_expiry: Optional[datetime] = None
+
+
