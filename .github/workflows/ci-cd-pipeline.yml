@@ -68,20 +68,37 @@ jobs:
         run: |
           echo "Skipping Test for now"
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
+  # deploy:
+  #   needs: build
+  #   runs-on: ubuntu-latest
 
-    steps:
+  #   steps:
+  #     - name: Deploy to EC2
+  #       uses: appleboy/ssh-action@v0.1.6
+  #       with:
+  #         host: ${{ secrets.EC2_HOST }}
+  #         username: ${{ secrets.EC2_USER }}
+  #         key: ${{ secrets.EC2_SSH_KEY }}
+  #         script: |
+  #           cd ~/evetis-server
+  #           git pull origin main
+  #           source venv/bin/activate
+  #           pip install -r requirements.txt
+  #           sudo systemctl restart evetis
+    deploy:
+      needs: build
+      runs-on: ubuntu-latest
+  
+      steps:
       - name: Deploy to EC2
-        uses: appleboy/ssh-action@v0.1.6
+        uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
+          username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~/evetis-server
+            cd ~/Eventis
             git pull origin main
             source venv/bin/activate
             pip install -r requirements.txt
-            sudo systemctl restart evetis
+            sudo systemctl restart eventis-server.service

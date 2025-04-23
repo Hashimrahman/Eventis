@@ -56,3 +56,7 @@ def reset_password_endpoint(data: ResetPasswordRequest):
         return reset_password(data)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+@router.get("/test-cicd")
+def test_cicd():
+    return {"msg" : "Testing ci cd"}
