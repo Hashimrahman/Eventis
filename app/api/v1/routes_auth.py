@@ -85,14 +85,14 @@ router = APIRouter()
 @router.post("/register")
 async def register(data: RegisterRequest):
     try:
-        return await register_user(data)  # Await the async function
+        return await register_user(data)  
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
 
 @router.post("/login", response_model=TokenResponse)
 async def login(data: LoginRequest):
-    auth_data = await authenticate_user(data.email, data.password)  # Await the async function
+    auth_data = await authenticate_user(data.email, data.password)  
     if not auth_data:
         raise HTTPException(status_code=401, detail="Invalid credentials")
     return auth_data
@@ -101,7 +101,7 @@ async def login(data: LoginRequest):
 @router.get("/verify-email")
 async def verify_email(token: str):
     try:
-        return await email_verification(token)  # Await the async function
+        return await email_verification(token)  
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -109,7 +109,7 @@ async def verify_email(token: str):
 @router.post("/forgot-password")
 async def forgot_password(data: ForgotPasswordRequest):
     try:
-        return await initiate_password_reset(data.email)  # Await the async function
+        return await initiate_password_reset(data.email)  
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -117,11 +117,11 @@ async def forgot_password(data: ForgotPasswordRequest):
 @router.post("/reset-password")
 async def reset_password_endpoint(data: ResetPasswordRequest):
     try:
-        return await reset_password(data)  # Await the async function
+        return await reset_password(data) 
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
 
 @router.get("/test-cicd")
 async def test_cicd():
-    return {"msg": "CICD Final Setup checking"}
+    return {"msg": "CICD Final Setup checking 2"}
